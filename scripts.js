@@ -21,20 +21,20 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
 //   const Accuracy = document.getElementById("accuracy");
   
   function startGame() {
-      score = 0; // รีเซ็ตคะแนน
-      time = 60; // รีเซ็ตเวลา
-      input = ""; // รีเซ็ตข้อความที่พิมพ์
-      isGameRunning = true; // ตั้งสถานะเริ่มเกม
+      score = 0; 
+      time = 60; 
+      input = ""; 
+      isGameRunning = true; 
       Score.textContent = score; 
       Time.textContent = time; 
-      startButton.disabled = true; // ปิดปุ่มเริ่มเกม
-      words.push(...correctWords); // เพิ่มคำที่พิมพ์ถูกไปแล้วกลับไปในอาร์เรย์ ***...correctWords คือการเพิ่มคำที่พิมพ์ถูกไปแล้วกลับไปในอาร์เรย์
+      startButton.disabled = true; 
+      words.push(...correctWords); // เพิ่มคำที่พิมพ์ถูกเข้าไปในอาร์เรย์ words **...คือการเพิ่มคำที่อยู่ในอาร์เรย์ correctWords ให้เข้าไปในอาร์เรย์ words
       correctWords = []; // รีเซ็ตคำที่พิมพ์ถูก
   
       randomWord();
       timer = setInterval(countdown, 1000); // สร้าง setInterval ให้เรียกฟังก์ชัน countdown ทุกๆ 1 วินาที
   
-    //document.body.focus(); // ให้เคอร์เซอร์อยู่ที่ body
+    //document.body.focus(); 
   }
   
   function randomWord() {
@@ -51,7 +51,7 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
   
       randomWords = Math.floor(Math.random() * (words.length - 1)); // สุ่มคำ **floor คือปัดเศษลง
       output = words[randomWords]; // นำคำที่สุ่มได้ เก็บไว้ใน output
-      Word.textContent = output; // แสดงคำใน UI
+      Word.textContent = output; 
   }
   
   function countdown() {
@@ -70,13 +70,13 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
           const span = document.createElement("span"); // สร้าง element span
           if (i < input.length) {
               if (input[i].toLowerCase() === output[i].toLowerCase()) { // ถ้าตัวอักษรที่พิมพ์ตรงกับคำที่แสดง
-                  span.classList.add("correct"); // ใส่ class correct
+                  span.classList.add("correct"); 
               } else {
-                  span.classList.add("incorrect"); // ใส่ class incorrect
+                  span.classList.add("incorrect"); 
               }
               span.textContent = output[i]; 
           } else {
-              span.classList.add("remaining"); // ใส่ class remaining
+              span.classList.add("remaining"); 
               span.textContent = output[i];
           }
           Word.appendChild(span); // เพิ่ม span ใน Word
@@ -100,7 +100,7 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
           words.splice(randomWords, 1); // ลบคำที่ถูกต้องออกจากอาร์เรย์ words
           randomWord();
       } else if (!output.toLowerCase().startsWith(input.trim().toLowerCase())) { // ถ้าคำที่พิมพ์ไม่ตรงกับคำที่แสดง **startsWith คือเช็คว่าคำที่พิมพ์เริ่มต้นด้วยคำที่แสดงหรือไม่
-          incorrect = 0; //ตัวนับตัวอักษรที่พิมพ์ผิด
+          incorrect = 0; 
   
           //ตรวจสอบที่ละตัวอักษร **? คือถ้าไม่เท่ากันให้ทำอะไรกับตัวอักษรนั้น toLowerCase คือเปลี่ยนเป็นตัวพิมพ์เล็ก
           for (let i = 0; i < input.length; i++) {
@@ -108,8 +108,8 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
                   incorrect++; 
               }
   
-              // ถ้าพิมพ์ผิดมากกว่า 3 ตัว ให้ลดคะแนน และเปลี่ยนคำใหม่
-              if (incorrect >= 3) {
+              // ถ้าพิมพ์ผิดมากกว่า 2 ตัว ให้ลดคะแนน และเปลี่ยนคำใหม่
+              if (incorrect > 2) {
                 incorrectAudio.pause();
                     incorrectAudio.currentTime = 0; 
                 incorrectAudio.play(); 
@@ -124,7 +124,7 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
               }
           }
           
-          // ถ้าพิมพ์ถูกต้องทั้งคำและไม่ผิดเกิน3ครั้ง
+          // ถ้าพิมพ์ถูกต้องทั้งคำและไม่ผิดเกิน2ครั้ง **input.length คือความยาวของคำที่พิมพ์ === output.length คือความยาวของคำที่แสดง
           if (input.length === output.length) {
             correctAudio.pause(); 
                 correctAudio.currentTime = 0; 
@@ -142,7 +142,7 @@ const words = ["POPULATION", "ECONOMY", "HEALTH", "INDUSTRY", "CLIMATE", "ENERGY
   }
   
   function endGame() {
-      isGameRunning = false; // ตั้งสถานะหยุดเกม
+      isGameRunning = false; 
       Word.textContent = "Game Over!!!"; 
       alert("Game over! Your score is " + score
        + "\nCorrect words is " + correctWords.length); 
